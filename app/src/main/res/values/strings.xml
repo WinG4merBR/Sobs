@@ -2,4 +2,8 @@
     <string name="app_name">Sobs</string>
     <string name="fa_a_seu_pedido">Faça seu pedido</string>
     <string name="todo">TODO</string>
+    <string name="click_here">Click here</string>
+    <string name="title_activity_root">RootActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
