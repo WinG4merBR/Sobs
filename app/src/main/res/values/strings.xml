@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Sobs</string>
+    <string name="fa_a_seu_pedido">Faça seu pedido</string>
+    <string name="todo">TODO</string>
 </resources>
